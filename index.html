@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Тренер по кроссфиту — Ваш путь в новую жизнь</title>
+  <style>
+    :root {
+      --bg: #050816;
+      --bg-soft: #0b1020;
+      --accent: #f97316;
+      --accent-soft: rgba(249, 115, 22, 0.15);
+      --text-main: #f9fafb;
+      --text-muted: #9ca3af;
+      --card-bg: rgba(15, 23, 42, 0.9);
+      --border-subtle: rgba(148, 163, 184, 0.25);
+      --shadow-soft: 0 22px 45px rgba(15, 23, 42, 0.95);
+      --radius-lg: 24px;
+      --radius-pill: 999px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+      color: var(--text-main);
+      background:
+        radial-gradient(circle at 0% 0%, rgba(56, 189, 248, 0.09), transparent 55%),
+        radial-gradient(circle at 100% 0%, rgba(248, 113, 113, 0.12), transparent 55%),
+        radial-gradient(circle at 0% 100%, rgba(45, 212, 191, 0.14), transparent 55%),
+        var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 1040px;
+    }
+
+    .hero {
+      position: relative;
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.85));
+      border-radius: 32px;
+      padding: 32px 28px 28px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      box-shadow: var(--shadow-soft);
+      overflow: hidden;
+      backdrop-filter: blur(26px);
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 28px;
+    }
+
+    @media (max-width: 840px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+        padding: 26px 22px 22px;
+      }
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 10% 20%, rgba(248, 113, 113, 0.18), transparent 55%),
+        radial-gradient(circle at 90% 80%, rgba(56, 189, 248, 0.18), transparent 55%);
+      opacity: 0.75;
+      pointer-events: none;
+      mix-blend-mode: screen;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 4px 10px 4px 4px;
+      border-radius: var(--radius-pill);
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      color: var(--text-muted);
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow-dot {
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 20%, #f97316, #ea580c);
+      box-shadow: 0 0 0 1px rgba(248, 250, 252, 0.04), 0 0 32px rgba(249, 115, 22, 0.65);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #0b1020;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .eyebrow-text-strong {
+      color: var(--text-main);
+      font-weight: 600;
+    }
+
+    .title {
+      font-size: clamp(30px, 4vw, 40px);
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+    }
+
+    .title span {
+      display: inline-block;
+    }
+
+    .title span.highlight {
+      color: #fed7aa;
+      text-shadow: 0 0 24px rgba(249, 115, 22, 0.85);
+    }
+
+    .subtitle {
+      margin-top: 6px;
+      max-width: 440px;
+      color: var(--text-muted);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .benefits {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 8px;
+    }
+
+    @media (max-width: 720px) {
+      .benefits {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .benefit-card {
+      position: relative;
+      padding: 14px 14px 13px;
+      border-radius: 18px;
+      background: radial-gradient(circle at 0 0, rgba(249, 115, 22, 0.18), transparent 55%), var(--card-bg);
+      border: 1px solid var(--border-subtle);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      overflow: hidden;
+    }
+
+    .benefit-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 1px 8px 2px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      width: fit-content;
+    }
+
+    .benefit-pill-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 12px rgba(34, 197, 94, 0.9);
+    }
+
+    .benefit-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .benefit-note {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .cta-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-top: 4px;
+      flex-wrap: wrap;
+    }
+
+    .cta-button {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      padding: 12px 26px;
+      border-radius: var(--radius-pill);
+      background: radial-gradient(circle at 0 0, #fed7aa, #f97316);
+      color: #111827;
+      font-weight: 600;
+      font-size: 14px;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      box-shadow:
+        0 0 0 1px rgba(248, 250, 252, 0.4),
+        0 18px 35px rgba(15, 23, 42, 0.95),
+        0 0 90px rgba(249, 115, 22, 0.9);
+      transition: transform 0.18s ease-out, box-shadow 0.18s ease-out, filter 0.18s ease-out;
+    }
+
+    .cta-button span.icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.92);
+      color: #f97316;
+      font-size: 14px;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-1px) translateZ(0);
+      filter: brightness(1.04);
+      box-shadow:
+        0 0 0 1px rgba(248, 250, 252, 0.7),
+        0 20px 40px rgba(15, 23, 42, 1),
+        0 0 120px rgba(249, 115, 22, 1);
+    }
+
+    .cta-button:active {
+      transform: translateY(0);
+      box-shadow:
+        0 0 0 1px rgba(248, 250, 252, 0.5),
+        0 10px 20px rgba(15, 23, 42, 1),
+        0 0 70px rgba(249, 115, 22, 0.9);
+    }
+
+    .cta-caption {
+      font-size: 12px;
+      color: var(--text-muted);
+      max-width: 260px;
+    }
+
+    /* Right column: visual */
+    .visual-wrap {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: stretch;
+      justify-content: flex-end;
+      pointer-events: none;
+    }
+
+    .visual-card {
+      position: relative;
+      width: 100%;
+      max-width: 320px;
+      margin-left: auto;
+      padding: 18px 18px 16px;
+      border-radius: 26px;
+      background: radial-gradient(circle at 0 0, rgba(248, 113, 113, 0.2), transparent 60%), #020617;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      box-shadow:
+        0 20px 40px rgba(15, 23, 42, 1),
+        0 0 120px rgba(56, 189, 248, 0.9);
+      overflow: hidden;
+    }
+
+    @media (max-width: 840px) {
+      .visual-card {
+        max-width: none;
+      }
+    }
+
+    .visual-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 9px 4px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+
+    .visual-tag-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 14px rgba(34, 197, 94, 1);
+    }
+
+    .visual-main {
+      position: relative;
+      border-radius: 18px;
+      padding: 18px 14px 14px;
+      background: radial-gradient(circle at 50% 0%, rgba(15, 23, 42, 0.4), transparent 55%), linear-gradient(145deg, #020617, #020617);
+      border: 1px solid rgba(15, 23, 42, 0.9);
+      overflow: hidden;
+    }
+
+    .visual-main::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background:
+        radial-gradient(circle at 0 0, rgba(248, 113, 113, 0.28), transparent 60%),
+        radial-gradient(circle at 100% 0, rgba(56, 189, 248, 0.3), transparent 60%),
+        radial-gradient(circle at 50% 110%, rgba(52, 211, 153, 0.35), transparent 60%);
+      opacity: 0.9;
+      mix-blend-mode: screen;
+    }
+
+    .visual-main-inner {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      gap: 14px;
+    }
+
+    @media (max-width: 520px) {
+      .visual-main-inner {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .visual-figure {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .visual-coach-title {
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .visual-coach-meta {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .visual-bars {
+      margin-top: 4px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .bar-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .bar-label {
+      min-width: 70px;
+    }
+
+    .bar-track {
+      position: relative;
+      flex: 1;
+      height: 6px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #22c55e, #facc15, #f97316);
+    }
+
+    .bar-fill--90 { width: 90%; }
+    .bar-fill--95 { width: 95%; }
+    .bar-fill--85 { width: 85%; }
+
+    .visual-metrics {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: 6px;
+    }
+
+    .metric-pill {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 4px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.97);
+      border: 1px solid rgba(148, 163, 184, 0.65);
+      font-size: 11px;
+    }
+
+    .metric-pill strong {
+      font-size: 13px;
+      color: #bbf7d0;
+    }
+
+    .visual-note {
+      font-size: 11px;
+      color: var(--text-muted);
+      opacity: 0.9;
+      margin-top: 4px;
+    }
+
+    .visual-side {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .visual-stat {
+      padding: 10px 10px 9px;
+      border-radius: 16px;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(148, 163, 184, 0.65);
+      font-size: 11px;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .visual-stat strong {
+      font-size: 16px;
+      color: #fef9c3;
+    }
+
+    .visual-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px 6px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.97);
+      border: 1px solid rgba(148, 163, 184, 0.65);
+      font-size: 11px;
+      align-self: flex-start;
+    }
+
+    .visual-badge-dot {
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 20%, #f97316, #ea580c);
+      box-shadow: 0 0 20px rgba(249, 115, 22, 0.8);
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-inner">
+        <div class="eyebrow">
+          <div class="eyebrow-dot">CF</div>
+          <span class="eyebrow-text-strong">Тренер по кроссфиту</span>
+          <span>персональные и малые группы</span>
+        </div>
+
+        <header>
+          <h1 id="hero-title" class="title">
+            <span>Тренер по кроссфиту —</span><br>
+            <span class="highlight">Ваш путь в новую жизнь</span>
+          </h1>
+          <p class="subtitle">
+            Индивидуальный подход, безопасная техника и поддержка на каждом этапе. 
+            Подойдет и для новичков, и для тех, кто давно хотел выйти на новый уровень.
+          </p>
+        </header>
+
+        <div class="benefits" aria-label="Преимущества">
+          <article class="benefit-card">
+            <div class="benefit-pill">
+              <span class="benefit-pill-dot"></span>
+              <span>Результат</span>
+            </div>
+            <h2 class="benefit-title">Гарантия достижения результата</h2>
+            <p class="benefit-note">
+              Четкий план тренировок и контроля прогресса, чтобы вы видели реальные изменения в теле и самочувствии.
+            </p>
+          </article>
+
+          <article class="benefit-card">
+            <div class="benefit-pill">
+              <span class="benefit-pill-dot"></span>
+              <span>Подход</span>
+            </div>
+            <h2 class="benefit-title">Профессиональный подход к тренировкам</h2>
+            <p class="benefit-note">
+              Техника, восстановление и нагрузка подобраны с учетом вашего уровня и целей — без бессмысленных упражнений.
+            </p>
+          </article>
+
+          <article class="benefit-card">
+            <div class="benefit-pill">
+              <span class="benefit-pill-dot"></span>
+              <span>Доступно</span>
+            </div>
+            <h2 class="benefit-title">Доступные цены</h2>
+            <p class="benefit-note">
+              Гибкие форматы тренировок и пакеты занятий, чтобы регулярный кроссфит стал частью жизни, а не разовой акцией.
+            </p>
+          </article>
+        </div>
+
+        <div class="cta-row">
+          <button class="cta-button" type="button">
+            <span>Начать новую жизнь</span>
+            <span class="icon">→</span>
+          </button>
+          <p class="cta-caption">
+            Оставьте заявку или напишите тренеру — вместе мы соберем план тренировок под вашу цель: похудение, сила, выносливость.
+          </p>
+        </div>
+      </div>
+
+      <aside class="visual-wrap" aria-hidden="true">
+        <div class="visual-card">
+          <div class="visual-tag">
+            <span class="visual-tag-dot"></span>
+            <span>Живой прогресс, не теория</span>
+          </div>
+
+          <div class="visual-main">
+            <div class="visual-main-inner">
+              <div class="visual-figure">
+                <div>
+                  <div class="visual-coach-title">Персональный кроссфит-наставник</div>
+                  <div class="visual-coach-meta">Сила · Выносливость · Мобилити</div>
+                </div>
+
+                <div class="visual-bars">
+                  <div class="bar-row">
+                    <span class="bar-label">Сила</span>
+                    <div class="bar-track">
+                      <div class="bar-fill bar-fill--95"></div>
+                    </div>
+                  </div>
+                  <div class="bar-row">
+                    <span class="bar-label">Выносливость</span>
+                    <div class="bar-track">
+                      <div class="bar-fill bar-fill--90"></div>
+                    </div>
+                  </div>
+                  <div class="bar-row">
+                    <span class="bar-label">Техника</span>
+                    <div class="bar-track">
+                      <div class="bar-fill bar-fill--85"></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="visual-metrics">
+                  <div class="metric-pill">
+                    <strong>12+</strong>
+                    <span>месяцев стабильных результатов у учеников</span>
+                  </div>
+                  <div class="metric-pill">
+                    <strong>3–5</strong>
+                    <span>тренировок в неделю без выгорания</span>
+                  </div>
+                </div>
+
+                <p class="visual-note">
+                  Сбалансированная нагрузка и восстановление: вы двигаетесь к цели без травм и откатов.
+                </p>
+              </div>
+
+              <div class="visual-side">
+                <div class="visual-stat">
+                  <span>Средний результат за 3 месяца</span>
+                  <strong>-5–8 кг</strong>
+                  <span>жира без жестких диет</span>
+                </div>
+                <div class="visual-stat">
+                  <span>Фокус на здоровье</span>
+                  <strong>+30%</strong>
+                  <span>к энергии и самочувствию по отзывам учеников</span>
+                </div>
+                <div class="visual-badge">
+                  <div class="visual-badge-dot"></div>
+                  <span>Старт в удобном для вас темпе</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </section>
+  </main>
+</body>
+</html>
